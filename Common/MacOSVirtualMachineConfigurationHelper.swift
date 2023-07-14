@@ -1,8 +1,8 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+See the LICENSE.txt file for this sample’s licensing information.
 
 Abstract:
-Helper that creates various configuration objects exposed in the `VZVirtualMachineConfiguration`.
+The helper that creates various configuration objects exposed in the `VZVirtualMachineConfiguration`.
 */
 
 import Foundation
@@ -23,7 +23,7 @@ struct MacOSVirtualMachineConfigurationHelper {
 
     static func computeMemorySize() -> UInt64 {
         // We choose 6.5 GB to leave about 3 GB of RAM for the host machine when running 2 VMs with 13 GB of total memory.
-        var memorySize = (6.5 * 1024 * 1024 * 1024) as UInt64
+        var memorySize = UInt64(6.5 * 1024 * 1024 * 1024)
         memorySize = max(memorySize, VZVirtualMachineConfiguration.minimumAllowedMemorySize)
         memorySize = min(memorySize, VZVirtualMachineConfiguration.maximumAllowedMemorySize)
 
@@ -37,7 +37,7 @@ struct MacOSVirtualMachineConfigurationHelper {
     static func createGraphicsDeviceConfiguration() -> VZMacGraphicsDeviceConfiguration {
         let graphicsConfiguration = VZMacGraphicsDeviceConfiguration()
         graphicsConfiguration.displays = [
-            // We abitrarily choose the resolution of the display to be 1920 x 1200.
+            // The system arbitrarily chooses the resolution of the display to be 1920 x 1200.
             VZMacGraphicsDisplayConfiguration(widthInPixels: 1920, heightInPixels: 1200, pixelsPerInch: 80)
         ]
 
@@ -45,7 +45,7 @@ struct MacOSVirtualMachineConfigurationHelper {
     }
 
     static func createBlockDeviceConfiguration() -> VZVirtioBlockDeviceConfiguration {
-        guard let diskImageAttachment = try? VZDiskImageStorageDeviceAttachment(url: URL(fileURLWithPath: diskImagePath), readOnly: false) else {
+        guard let diskImageAttachment = try? VZDiskImageStorageDeviceAttachment(url: diskImageURL, readOnly: false) else {
             fatalError("Failed to create Disk image.")
         }
         let disk = VZVirtioBlockDeviceConfiguration(attachment: diskImageAttachment)
@@ -54,31 +54,24 @@ struct MacOSVirtualMachineConfigurationHelper {
 
     static func createNetworkDeviceConfiguration() -> VZVirtioNetworkDeviceConfiguration {
         let networkDevice = VZVirtioNetworkDeviceConfiguration()
+        networkDevice.macAddress = VZMACAddress(string: "d6:a7:58:8e:78:d4")!
 
         let networkAttachment = VZNATNetworkDeviceAttachment()
         networkDevice.attachment = networkAttachment
+
         return networkDevice
     }
 
-    static func createPointingDeviceConfiguration() -> VZUSBScreenCoordinatePointingDeviceConfiguration {
-        return VZUSBScreenCoordinatePointingDeviceConfiguration()
+    static func createPointingDeviceConfiguration() -> VZPointingDeviceConfiguration {
+        return VZMacTrackpadConfiguration()
     }
 
-    static func createKeyboardConfiguration() -> VZUSBKeyboardConfiguration {
-        return VZUSBKeyboardConfiguration()
-    }
-
-    static func createAudioDeviceConfiguration() -> VZVirtioSoundDeviceConfiguration {
-        let audioConfiguration = VZVirtioSoundDeviceConfiguration()
-
-        let inputStream = VZVirtioSoundDeviceInputStreamConfiguration()
-        inputStream.source = VZHostAudioInputStreamSource()
-
-        let outputStream = VZVirtioSoundDeviceOutputStreamConfiguration()
-        outputStream.sink = VZHostAudioOutputStreamSink()
-
-        audioConfiguration.streams = [inputStream, outputStream]
-        return audioConfiguration
+    static func createKeyboardConfiguration() -> VZKeyboardConfiguration {
+        if #available(macOS 14.0, *) {
+            return VZMacKeyboardConfiguration()
+        } else {
+            return VZUSBKeyboardConfiguration()
+        }
     }
 }
 
