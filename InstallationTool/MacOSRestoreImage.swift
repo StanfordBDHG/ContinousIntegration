@@ -1,9 +1,11 @@
-/*
- See the LICENSE.txt file for this sample’s licensing information.
- 
- Abstract:
- Download the latest macOS restore image from the network.
- */
+//
+// This source file is part of the Stanford BDGH VirtualMachine project
+// Based on https://developer.apple.com/documentation/virtualization/running_macos_in_a_virtual_machine_on_apple_silicon
+//
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
+//
 
 import Foundation
 import Virtualization
@@ -19,8 +21,8 @@ class MacOSRestoreImage: NSObject {
         NSLog("Attempting to download latest available restore image.")
         VZMacOSRestoreImage.fetchLatestSupported { [self](result: Result<VZMacOSRestoreImage, Error>) in
             switch result {
-            case let .failure(error):
-                fatalError(error.localizedDescription)
+            case let .failure(virtualMachineError):
+                fatalError(virtualMachineError.localizedDescription)
                 
             case let .success(restoreImage):
                 downloadRestoreImage(restoreImage: restoreImage, completionHandler: completionHandler)
@@ -30,9 +32,9 @@ class MacOSRestoreImage: NSObject {
     
     // Download the restore image from the network.
     private func downloadRestoreImage(restoreImage: VZMacOSRestoreImage, completionHandler: @escaping () -> Void) {
-        let downloadTask = URLSession.shared.downloadTask(with: restoreImage.url) { localURL, response, error in
-            if let error = error {
-                fatalError("Download failed. \(error.localizedDescription).")
+        let downloadTask = URLSession.shared.downloadTask(with: restoreImage.url) { localURL, response, virtualMachineError in
+            if let virtualMachineError = virtualMachineError {
+                fatalError("Download failed. \(virtualMachineError.localizedDescription).")
             }
             
             guard (try? FileManager.default.moveItem(at: localURL!, to: restoreImageURL)) != nil else {

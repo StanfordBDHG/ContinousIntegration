@@ -1,9 +1,11 @@
-/*
- See the LICENSE.txt file for this sample’s licensing information.
- 
- Abstract:
- A helper class to install a macOS virtual machine.
- */
+//
+// This source file is part of the Stanford BDGH VirtualMachine project
+// Based on https://developer.apple.com/documentation/virtualization/running_macos_in_a_virtual_machine_on_apple_silicon
+//
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
+//
 
 import Virtualization
 
@@ -27,8 +29,8 @@ class MacOSVirtualMachineInstaller: NSObject {
         NSLog("Attempting to install from IPSW at \(ipswURL).")
         VZMacOSRestoreImage.load(from: ipswURL, completionHandler: { [self](result: Result<VZMacOSRestoreImage, Error>) in
             switch result {
-            case let .failure(error):
-                fatalError(error.localizedDescription)
+            case let .failure(virtualMachineError):
+                fatalError(virtualMachineError.localizedDescription)
                 
             case let .success(restoreImage):
                 installMacOS(restoreImage: restoreImage)
@@ -89,12 +91,12 @@ class MacOSVirtualMachineInstaller: NSObject {
             fatalError("memorySize isn't supported by the macOS configuration.")
         }
         
-        // Create a 128 GB disk image.
+        // Create a 200 GB disk image.
         createDiskImage()
         
         virtualMachineConfiguration.bootLoader = MacOSVirtualMachineConfigurationHelper.createBootLoader()
         virtualMachineConfiguration.graphicsDevices = [MacOSVirtualMachineConfigurationHelper.createGraphicsDeviceConfiguration()]
-        virtualMachineConfiguration.storageDevices = [MacOSVirtualMachineConfigurationHelper.createBlockDeviceConfiguration()]
+        virtualMachineConfiguration.storageDevices = [try! MacOSVirtualMachineConfigurationHelper.createBlockDeviceConfiguration()]
         virtualMachineConfiguration.networkDevices = [MacOSVirtualMachineConfigurationHelper.createNetworkDeviceConfiguration()]
         virtualMachineConfiguration.pointingDevices = [MacOSVirtualMachineConfigurationHelper.createPointingDeviceConfiguration()]
         virtualMachineConfiguration.keyboards = [MacOSVirtualMachineConfigurationHelper.createKeyboardConfiguration()]
@@ -116,8 +118,8 @@ class MacOSVirtualMachineInstaller: NSObject {
         
         NSLog("Starting installation.")
         installer.install(completionHandler: { (result: Result<Void, Error>) in
-            if case let .failure(error) = result {
-                fatalError(error.localizedDescription)
+            if case let .failure(virtualMachineError) = result {
+                fatalError(virtualMachineError.localizedDescription)
             } else {
                 NSLog("Installation succeeded.")
             }

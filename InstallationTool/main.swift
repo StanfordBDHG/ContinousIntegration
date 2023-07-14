@@ -1,9 +1,11 @@
-/*
- See the LICENSE.txt file for this sample’s licensing information.
- 
- Abstract:
- The entry for `InstallationTool`.
- */
+//
+// This source file is part of the Stanford BDGH VirtualMachine project
+// Based on https://developer.apple.com/documentation/virtualization/running_macos_in_a_virtual_machine_on_apple_silicon
+//
+// SPDX-FileCopyrightText: 2023 Stanford University
+//
+// SPDX-License-Identifier: MIT
+//
 
 import Foundation
 
