@@ -7,7 +7,7 @@ Constants that point to the various file URLs that are used by this sample code.
 
 import Foundation
 
-let vmBundlePath = NSHomeDirectory() + "/VM.bundle/"
+let vmBundlePath = NSHomeDirectory() + "/GitHubAction.bundle/"
 
 let diskImagePath = vmBundlePath + "Disk.img"
 

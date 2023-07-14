@@ -90,7 +90,7 @@ class MacOSVirtualMachineInstaller: NSObject {
             fatalError("memorySize isn't supported by the macOS configuration.")
         }
 
-        // Create a 64 GB disk image.
+        // Create a 200 GB disk image.
         createDiskImage()
 
         virtualMachineConfiguration.bootLoader = MacOSVirtualMachineConfigurationHelper.createBootLoader()
@@ -150,8 +150,8 @@ class MacOSVirtualMachineInstaller: NSObject {
             fatalError("Cannot create disk image.")
         }
 
-        // 64GB disk space.
-        var result = ftruncate(diskFd, 64 * 1024 * 1024 * 1024)
+        // 200 GB disk space.
+        var result = ftruncate(diskFd, 200 * 1024 * 1024 * 1024)
         if result != 0 {
             fatalError("ftruncate() failed.")
         }

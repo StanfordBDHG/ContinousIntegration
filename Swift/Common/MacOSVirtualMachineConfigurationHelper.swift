@@ -22,8 +22,8 @@ struct MacOSVirtualMachineConfigurationHelper {
     }
 
     static func computeMemorySize() -> UInt64 {
-        // We arbitrarily choose 4GB.
-        var memorySize = (4 * 1024 * 1024 * 1024) as UInt64
+        // We arbitrarily choose 7 GB.
+        var memorySize = (8 * 1024 * 1024 * 1024) as UInt64
         memorySize = max(memorySize, VZVirtualMachineConfiguration.minimumAllowedMemorySize)
         memorySize = min(memorySize, VZVirtualMachineConfiguration.maximumAllowedMemorySize)
 
