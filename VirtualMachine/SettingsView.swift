@@ -19,10 +19,11 @@ struct SettingsView: View {
         TabView {
             VirtualMachineSettingsView()
                 .tabItem {
-                    Label("Virtual Machine", systemImage: "desktopcomputer")
+                    Label(Bundle.main.displayName, systemImage: "desktopcomputer")
                 }
                 .tag(Tabs.virtualMachine)
         }
             .padding(20)
+            .navigationTitle(Bundle.main.displayName)
     }
 }

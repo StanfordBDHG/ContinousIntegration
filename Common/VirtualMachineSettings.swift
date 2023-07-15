@@ -15,7 +15,7 @@ enum VirtualMachineSettings {
     }
     
     enum Defaults {
-        static let vmBundlePath = "/VirtualMachine.bundle/"
+        static let vmBundlePath = "~/VirtualMachine.bundle/"
     }
     
     

@@ -14,6 +14,8 @@
 		2F3048972A61D81D000FBE33 /* VirtualMachineSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */; };
 		2F3048992A61D9F7000FBE33 /* VirtualMachineSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */; };
 		2F30489B2A61DA78000FBE33 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489A2A61DA78000FBE33 /* SettingsView.swift */; };
+		2F30489C2A621945000FBE33 /* VirtualMachineSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */; };
+		2F30489E2A622D8C000FBE33 /* Bundle+DisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */; };
 		8F87D52126C34111000EADA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D52026C34111000EADA4 /* AppDelegate.swift */; };
 		8F87D52326C34111000EADA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F87D52226C34111000EADA4 /* Assets.xcassets */; };
 		8F87D53426C341AC000EADA4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53326C341AC000EADA4 /* main.swift */; };
@@ -48,6 +50,7 @@
 		2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachineSettings.swift; sourceTree = "<group>"; };
 		2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachineSettingsView.swift; sourceTree = "<group>"; };
 		2F30489A2A61DA78000FBE33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+DisplayName.swift"; sourceTree = "<group>"; };
 		8F87D51D26C34111000EADA4 /* VirtualMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F87D52026C34111000EADA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F87D52226C34111000EADA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 		8F87D51F26C34111000EADA4 /* VirtualMachine */ = {
 			isa = PBXGroup;
 			children = (
+				2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */,
 				2F30488E2A61BC9F000FBE33 /* VirtualMachine.swift */,
 				8F87D52026C34111000EADA4 /* AppDelegate.swift */,
 				2F30489A2A61DA78000FBE33 /* SettingsView.swift */,
@@ -269,6 +273,7 @@
 				2F3048992A61D9F7000FBE33 /* VirtualMachineSettingsView.swift in Sources */,
 				2F30489B2A61DA78000FBE33 /* SettingsView.swift in Sources */,
 				8F87D52126C34111000EADA4 /* AppDelegate.swift in Sources */,
+				2F30489E2A622D8C000FBE33 /* Bundle+DisplayName.swift in Sources */,
 				2F3048972A61D81D000FBE33 /* VirtualMachineSettings.swift in Sources */,
 				8F87D54126C34259000EADA4 /* MacOSVirtualMachineDelegate.swift in Sources */,
 				8F87D54026C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */,
@@ -279,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F30489C2A621945000FBE33 /* VirtualMachineSettings.swift in Sources */,
 				8F87D54426C34269000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */,
 				8F87D53A26C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift in Sources */,
 				8FB90BEE26D5AC8100988F51 /* MacOSRestoreImage.swift in Sources */,
@@ -295,6 +301,7 @@
 			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -360,6 +367,7 @@
 			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -431,6 +439,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for using audio input devices.";
@@ -439,7 +448,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm;
 				PRODUCT_NAME = VirtualMachine;
@@ -467,6 +476,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for using audio input devices.";
@@ -475,7 +485,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm;
 				PRODUCT_NAME = VirtualMachine;
@@ -496,7 +506,7 @@
 				DEVELOPMENT_TEAM = 637867499T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm.installation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -515,7 +525,7 @@
 				DEVELOPMENT_TEAM = 637867499T;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm.installation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

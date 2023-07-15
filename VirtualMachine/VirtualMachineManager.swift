@@ -40,13 +40,14 @@ class VirtualMachineManager: ObservableObject {
         #endif
     }
     
+    @MainActor
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         #if arch(arm64)
         if #available(macOS 14.0, *) {
             if virtualMachine?.state == .running {
                 Task {
                     await pauseAndSaveVirtualMachine()
-                    await sender.reply(toApplicationShouldTerminate: true)
+                    sender.reply(toApplicationShouldTerminate: true)
                 }
                 
                 return .terminateLater
@@ -59,6 +60,7 @@ class VirtualMachineManager: ObservableObject {
     
     #if arch(arm64)
     // Create the Mac platform configuration.
+    @MainActor
     private func createMacPlaform() -> VZMacPlatformConfiguration {
         let macPlatform = VZMacPlatformConfiguration()
         
@@ -106,6 +108,7 @@ class VirtualMachineManager: ObservableObject {
     
     // MARK: Create the virtual machine configuration and instantiate the virtual machine.
     
+    @MainActor
     private func createVirtualMachine() {
         let virtualMachineConfiguration = VZVirtualMachineConfiguration()
         
@@ -139,6 +142,7 @@ class VirtualMachineManager: ObservableObject {
     }
     
     // MARK: Start, restore, and save the virtual machine.
+    @MainActor
     private func startVirtualMachine() async {
         do {
             try await virtualMachine?.start()
@@ -147,6 +151,7 @@ class VirtualMachineManager: ObservableObject {
         }
     }
     
+    @MainActor
     private func resumeVirtualMachine() async {
         do {
             try await virtualMachine?.resume()
@@ -156,6 +161,7 @@ class VirtualMachineManager: ObservableObject {
     }
     
     @available(macOS 14.0, *)
+    @MainActor
     private func saveVirtualMachine() async {
         do {
             try await virtualMachine?.saveMachineStateTo(url: VirtualMachineSettings.saveFileURL)
@@ -165,6 +171,7 @@ class VirtualMachineManager: ObservableObject {
     }
     
     @available(macOS 14.0, *)
+    @MainActor
     private func pauseAndSaveVirtualMachine() async {
         do {
             try await virtualMachine?.pause()
@@ -176,6 +183,7 @@ class VirtualMachineManager: ObservableObject {
     }
     
     @available(macOS 14.0, *)
+    @MainActor
     private func restoreVirtualMachine() async {
         do {
             defer {

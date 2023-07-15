@@ -30,7 +30,7 @@ if CommandLine.arguments.count == 2 {
     let restoreImage = MacOSRestoreImage()
     restoreImage.download {
         // Install from the restore image that you downloaded.
-        installer.installMacOS(ipswURL: restoreImageURL)
+        installer.installMacOS(ipswURL: VirtualMachineSettings.restoreImageURL)
     }
     
     dispatchMain()

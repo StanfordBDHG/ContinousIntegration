@@ -15,7 +15,11 @@ struct VirtualMachineView: NSViewRepresentable {
     
     
     func makeNSView(context: Context) -> VZVirtualMachineView {
-        let virtualMachineView = VZVirtualMachineView()
+        VZVirtualMachineView()
+    }
+    
+    func updateNSView(_ virtualMachineView: VZVirtualMachineView, context: Context) {
+        virtualMachineView.virtualMachine = virtualMachine
         
         virtualMachineView.capturesSystemKeys = true
         
@@ -23,11 +27,5 @@ struct VirtualMachineView: NSViewRepresentable {
             // Configure the app to automatically respond to changes in the display size.
             virtualMachineView.automaticallyReconfiguresDisplay = true
         }
-        
-        return virtualMachineView
-    }
-    
-    func updateNSView(_ virtualMachineView: VZVirtualMachineView, context: Context) {
-        virtualMachineView.virtualMachine = virtualMachine
     }
 }
