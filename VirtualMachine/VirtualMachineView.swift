@@ -21,7 +21,11 @@ struct VirtualMachineView: NSViewRepresentable {
     func updateNSView(_ virtualMachineView: VZVirtualMachineView, context: Context) {
         virtualMachineView.virtualMachine = virtualMachine
         
-        virtualMachineView.capturesSystemKeys = true
+        virtualMachineView.becomeFirstResponder()
+        
+        DispatchQueue.main.async {
+            virtualMachineView.window?.makeFirstResponder(virtualMachineView)
+        }
         
         if #available(macOS 14.0, *) {
             // Configure the app to automatically respond to changes in the display size.
