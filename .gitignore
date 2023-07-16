@@ -25,6 +25,8 @@ xcuserdata/
 # Other files
 .DS_Store
 .env
+!Installation/.env
+!Installation/GitHubActions/.env
 
 # Documentation generation
 *.doccarchive
