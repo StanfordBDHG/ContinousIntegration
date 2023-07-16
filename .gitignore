@@ -1,21 +1,34 @@
-# See LICENSE folder for this sample’s licensing information.
 #
-# Apple sample code gitignore configuration.
+# This source file is part of the Stanford BDGH VirtualMachine project
+#
+# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
 
-# Finder
-.DS_Store
+# Swift Package Manager
+Package.resolved
+*.xcodeproj
+.swiftpm
+.build
+.xcodebuild
+.derivedData
+coverage.lcov
+*.xcresult
 
-# Xcode - User files
+# IDE related folders
+.idea
+
+# Xcode User settings
 xcuserdata/
 
-**/*.xcodeproj/project.xcworkspace/*
-!**/*.xcodeproj/project.xcworkspace/xcshareddata
+# Other files
+.DS_Store
+.env
 
-**/*.xcodeproj/project.xcworkspace/xcshareddata/*
-!**/*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+# Documentation generation
+*.doccarchive
+docs/
 
-**/*.playground/playground.xcworkspace/*
-!**/*.playground/playground.xcworkspace/xcshareddata
-
-**/*.playground/playground.xcworkspace/xcshareddata/*
-!**/*.playground/playground.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+# UITests Project
+!UITests.xcodeproj
