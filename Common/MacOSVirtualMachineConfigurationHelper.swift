@@ -24,8 +24,7 @@ struct MacOSVirtualMachineConfigurationHelper {
     }
     
     static func computeMemorySize() -> UInt64 {
-        // We choose 6.5 GB to leave about 3 GB of RAM for the host machine when running 2 VMs with 13 GB of total memory.
-        var memorySize = UInt64(6.5 * 1024 * 1024 * 1024)
+        var memorySize = UInt64(VirtualMachineSettings.memorySize * 1024 * 1024 * 1024)
         memorySize = max(memorySize, VZVirtualMachineConfiguration.minimumAllowedMemorySize)
         memorySize = min(memorySize, VZVirtualMachineConfiguration.maximumAllowedMemorySize)
         

@@ -12,14 +12,17 @@ import SwiftUI
 enum VirtualMachineSettings {
     enum StorageKeys {
         static let vmBundlePath = "VMBundlePath"
+        static let memorySize = "MemorySize"
     }
     
     enum Defaults {
         static let vmBundlePath = "~/VirtualMachine.bundle/"
+        static let memorySize: Double = 6
     }
     
     
-    @AppStorage(StorageKeys.vmBundlePath) static var vmBundlePath: String = Defaults.vmBundlePath
+    @AppStorage(StorageKeys.vmBundlePath) static var vmBundlePath = Defaults.vmBundlePath
+    @AppStorage(StorageKeys.memorySize) static var memorySize = Defaults.memorySize
     
     
     static var vmBundleURL: URL {

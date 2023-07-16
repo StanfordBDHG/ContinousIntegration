@@ -11,9 +11,8 @@ import Virtualization
 
 
 struct VirtualMachineSettingsView: View {
-    @AppStorage(VirtualMachineSettings.StorageKeys.vmBundlePath) private var vmBundlePath: String = VirtualMachineSettings.Defaults.vmBundlePath
-    // Memory size in GB
-    @AppStorage("memorySize") private var memorySize: Double = 8
+    @AppStorage(VirtualMachineSettings.StorageKeys.vmBundlePath) private var vmBundlePath = VirtualMachineSettings.Defaults.vmBundlePath
+    @AppStorage(VirtualMachineSettings.StorageKeys.memorySize) private var memorySize = VirtualMachineSettings.Defaults.memorySize
     
     
     private var minimumAllowedMemorySize: Double {
