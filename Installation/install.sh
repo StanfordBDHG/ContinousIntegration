@@ -5,13 +5,18 @@
 # Initial Setup
 # Ensure that you have set all the correct credentials in the .env file.
 
-# 1. Load the .env file
+# 1. Setup
+# Load credentials from the .env file
 . .env
 
+# Enable xcode-select without requiering a sudo password.
+# https://www.smileykeith.com/2021/08/12/xcode-select-sudoers/
+echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
 
 # 2. Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# After this point, no sudo access should be requested, the script should be able to finish on its own.
 
 # 3. Install tools
 brew install java
@@ -28,10 +33,6 @@ brew upgrade
 
 
 # 4. Install Xcode
-
-# Enable xcode-select without requiering a sudo password.
-# https://www.smileykeith.com/2021/08/12/xcode-select-sudoers/
-echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
 
 # Download Xcode Releases
 xcodes install --update --latest --experimental-unxip --empty-trash
@@ -52,5 +53,4 @@ cp -rf ./GitHubActions ~/actions-runner
 
 
 # 6. Cleanup
-echo "The installation is complete. Removing the .env credentials file to avoid leaking information."
-rm -f .env
+echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"
