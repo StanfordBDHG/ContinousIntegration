@@ -29,11 +29,15 @@ struct MainView: View {
     var body: some View {
         Group {
             if virtualMachineManager.virtualMachine == nil {
-                Text("No Virtual Machine")
-                Button("Reload") {
-                    Task {
-                        await virtualMachineManager.applicationDidFinishLaunching()
+                VStack {
+                    Text("No Virtual Machine")
+                    Button("Reload") {
+                        Task {
+                            await virtualMachineManager.applicationDidFinishLaunching()
+                        }
                     }
+                    Divider()
+                    BundleGeneratorView()
                 }
             } else {
                 VirtualMachineView(virtualMachine: virtualMachineManager.virtualMachine)

@@ -10,7 +10,7 @@ import SwiftUI
 
 
 @main
-struct TestApp: App {
+struct VirtualMachine: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     

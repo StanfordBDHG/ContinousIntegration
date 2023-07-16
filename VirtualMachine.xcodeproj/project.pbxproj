@@ -14,33 +14,17 @@
 		2F3048972A61D81D000FBE33 /* VirtualMachineSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */; };
 		2F3048992A61D9F7000FBE33 /* VirtualMachineSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */; };
 		2F30489B2A61DA78000FBE33 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489A2A61DA78000FBE33 /* SettingsView.swift */; };
-		2F30489C2A621945000FBE33 /* VirtualMachineSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */; };
 		2F30489E2A622D8C000FBE33 /* Bundle+DisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */; };
+		2FF9B5672A647C2800BB24B5 /* BundleGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9B5662A647C2800BB24B5 /* BundleGeneratorView.swift */; };
+		2FF9B5682A647C6800BB24B5 /* MacOSVirtualMachineInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */; };
+		2FF9B5692A647C6B00BB24B5 /* MacOSRestoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */; };
 		8F87D52126C34111000EADA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D52026C34111000EADA4 /* AppDelegate.swift */; };
 		8F87D52326C34111000EADA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F87D52226C34111000EADA4 /* Assets.xcassets */; };
-		8F87D53426C341AC000EADA4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53326C341AC000EADA4 /* main.swift */; };
-		8F87D53A26C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */; };
 		8F87D54026C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53D26C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift */; };
 		8F87D54126C34259000EADA4 /* MacOSVirtualMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53E26C34259000EADA4 /* MacOSVirtualMachineDelegate.swift */; };
-		8F87D54326C34265000EADA4 /* MacOSVirtualMachineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53E26C34259000EADA4 /* MacOSVirtualMachineDelegate.swift */; };
-		8F87D54426C34269000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53D26C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift */; };
-		8F87D54726C3427C000EADA4 /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F87D54626C3427C000EADA4 /* Virtualization.framework */; };
 		8F87D54826C34286000EADA4 /* Virtualization.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F87D54626C3427C000EADA4 /* Virtualization.framework */; };
 		8F87D54E26C344C4000EADA4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8F87D54D26C344C4000EADA4 /* README.md */; };
-		8FB90BEE26D5AC8100988F51 /* MacOSRestoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8F87D52F26C341AC000EADA4 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2F30488E2A61BC9F000FBE33 /* VirtualMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachine.swift; sourceTree = "<group>"; };
@@ -51,12 +35,10 @@
 		2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachineSettingsView.swift; sourceTree = "<group>"; };
 		2F30489A2A61DA78000FBE33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+DisplayName.swift"; sourceTree = "<group>"; };
+		2FF9B5662A647C2800BB24B5 /* BundleGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleGeneratorView.swift; sourceTree = "<group>"; };
 		8F87D51D26C34111000EADA4 /* VirtualMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F87D52026C34111000EADA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F87D52226C34111000EADA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8F87D53126C341AC000EADA4 /* VirtualMachineBundleGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VirtualMachineBundleGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F87D53326C341AC000EADA4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		8F87D53826C3423F000EADA4 /* VirtualMachineBundleGenerator.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = VirtualMachineBundleGenerator.entitlements; sourceTree = "<group>"; };
 		8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSVirtualMachineInstaller.swift; sourceTree = "<group>"; };
 		8F87D53B26C34250000EADA4 /* VirtualMachine.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = VirtualMachine.entitlements; sourceTree = "<group>"; };
 		8F87D53D26C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacOSVirtualMachineConfigurationHelper.swift; sourceTree = "<group>"; };
@@ -64,8 +46,6 @@
 		8F87D54626C3427C000EADA4 /* Virtualization.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Virtualization.framework; path = System/Library/Frameworks/Virtualization.framework; sourceTree = SDKROOT; };
 		8F87D54D26C344C4000EADA4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSRestoreImage.swift; sourceTree = "<group>"; };
-		B0E246092DFBF28FAEA2709F /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,31 +57,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F87D52E26C341AC000EADA4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F87D54726C3427C000EADA4 /* Virtualization.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09E329497FB7E44895839D88 /* LICENSE */ = {
+		2FF9B5622A647B9B00BB24B5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B0E246092DFBF28FAEA2709F /* LICENSE.txt */,
+				2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */,
 			);
-			path = LICENSE;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3026A0D16D3A077128FE4194 /* Configuration */ = {
+		2FF9B5632A647BA600BB24B5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */,
+				2F30489A2A61DA78000FBE33 /* SettingsView.swift */,
+				2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */,
 			);
-			name = Configuration;
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		2FF9B5642A647BC600BB24B5 /* VirtualMachine */ = {
+			isa = PBXGroup;
+			children = (
+				2F3048902A61BCD7000FBE33 /* VirtualMachineView.swift */,
+				2F3048922A61C07D000FBE33 /* VirtualMachineManager.swift */,
+			);
+			path = VirtualMachine;
+			sourceTree = "<group>";
+		};
+		2FF9B5652A647BD300BB24B5 /* BundleGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				2FF9B5662A647C2800BB24B5 /* BundleGeneratorView.swift */,
+				8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */,
+				8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */,
+			);
+			path = BundleGenerator;
 			sourceTree = "<group>";
 		};
 		8F87D51426C34111000EADA4 = {
@@ -110,11 +102,8 @@
 				8F87D54D26C344C4000EADA4 /* README.md */,
 				8F87D52C26C3418F000EADA4 /* Common */,
 				8F87D51F26C34111000EADA4 /* VirtualMachine */,
-				8F87D53226C341AC000EADA4 /* VirtualMachineBundleGenerator */,
 				8F87D51E26C34111000EADA4 /* Products */,
 				8F87D54526C3427C000EADA4 /* Frameworks */,
-				3026A0D16D3A077128FE4194 /* Configuration */,
-				09E329497FB7E44895839D88 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				8F87D51D26C34111000EADA4 /* VirtualMachine.app */,
-				8F87D53126C341AC000EADA4 /* VirtualMachineBundleGenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,14 +118,13 @@
 		8F87D51F26C34111000EADA4 /* VirtualMachine */ = {
 			isa = PBXGroup;
 			children = (
-				2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */,
 				2F30488E2A61BC9F000FBE33 /* VirtualMachine.swift */,
 				8F87D52026C34111000EADA4 /* AppDelegate.swift */,
-				2F30489A2A61DA78000FBE33 /* SettingsView.swift */,
-				2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */,
 				2F3048942A61D354000FBE33 /* MainView.swift */,
-				2F3048902A61BCD7000FBE33 /* VirtualMachineView.swift */,
-				2F3048922A61C07D000FBE33 /* VirtualMachineManager.swift */,
+				2FF9B5642A647BC600BB24B5 /* VirtualMachine */,
+				2FF9B5652A647BD300BB24B5 /* BundleGenerator */,
+				2FF9B5632A647BA600BB24B5 /* Settings */,
+				2FF9B5622A647B9B00BB24B5 /* Extensions */,
 				8F87D53B26C34250000EADA4 /* VirtualMachine.entitlements */,
 				8F87D52226C34111000EADA4 /* Assets.xcassets */,
 			);
@@ -152,17 +139,6 @@
 				2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		8F87D53226C341AC000EADA4 /* VirtualMachineBundleGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				8F87D53326C341AC000EADA4 /* main.swift */,
-				8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */,
-				8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */,
-				8F87D53826C3423F000EADA4 /* VirtualMachineBundleGenerator.entitlements */,
-			);
-			path = VirtualMachineBundleGenerator;
 			sourceTree = "<group>";
 		};
 		8F87D54526C3427C000EADA4 /* Frameworks */ = {
@@ -193,23 +169,6 @@
 			productReference = 8F87D51D26C34111000EADA4 /* VirtualMachine.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8F87D53026C341AC000EADA4 /* VirtualMachineBundleGenerator */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8F87D53526C341AC000EADA4 /* Build configuration list for PBXNativeTarget "VirtualMachineBundleGenerator" */;
-			buildPhases = (
-				8F87D52D26C341AC000EADA4 /* Sources */,
-				8F87D52E26C341AC000EADA4 /* Frameworks */,
-				8F87D52F26C341AC000EADA4 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = VirtualMachineBundleGenerator;
-			productName = InstallationTool;
-			productReference = 8F87D53126C341AC000EADA4 /* VirtualMachineBundleGenerator */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -223,9 +182,6 @@
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					8F87D51C26C34111000EADA4 = {
-						CreatedOnToolsVersion = 13.0;
-					};
-					8F87D53026C341AC000EADA4 = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -244,7 +200,6 @@
 			projectRoot = "";
 			targets = (
 				8F87D51C26C34111000EADA4 /* VirtualMachine */,
-				8F87D53026C341AC000EADA4 /* VirtualMachineBundleGenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -266,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF9B5672A647C2800BB24B5 /* BundleGeneratorView.swift in Sources */,
 				2F3048952A61D354000FBE33 /* MainView.swift in Sources */,
 				2F3048932A61C07D000FBE33 /* VirtualMachineManager.swift in Sources */,
+				2FF9B5682A647C6800BB24B5 /* MacOSVirtualMachineInstaller.swift in Sources */,
+				2FF9B5692A647C6B00BB24B5 /* MacOSRestoreImage.swift in Sources */,
 				2F30488F2A61BC9F000FBE33 /* VirtualMachine.swift in Sources */,
 				2F3048912A61BCD8000FBE33 /* VirtualMachineView.swift in Sources */,
 				2F3048992A61D9F7000FBE33 /* VirtualMachineSettingsView.swift in Sources */,
@@ -280,25 +238,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F87D52D26C341AC000EADA4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2F30489C2A621945000FBE33 /* VirtualMachineSettings.swift in Sources */,
-				8F87D54426C34269000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */,
-				8F87D53A26C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift in Sources */,
-				8FB90BEE26D5AC8100988F51 /* MacOSRestoreImage.swift in Sources */,
-				8F87D54326C34265000EADA4 /* MacOSVirtualMachineDelegate.swift in Sources */,
-				8F87D53426C341AC000EADA4 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		8F87D52726C34111000EADA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
@@ -364,7 +308,6 @@
 		};
 		8F87D52826C34111000EADA4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = arm64;
@@ -423,7 +366,6 @@
 		};
 		8F87D52A26C34111000EADA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -439,7 +381,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine 2";
+				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for using audio input devices.";
@@ -450,7 +392,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm2;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm;
 				PRODUCT_NAME = VirtualMachine;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -460,7 +402,6 @@
 		};
 		8F87D52B26C34111000EADA4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -476,7 +417,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine 2";
+				INFOPLIST_KEY_CFBundleDisplayName = "Virtual Machine";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for using audio input devices.";
@@ -487,48 +428,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm2;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm;
 				PRODUCT_NAME = VirtualMachine;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		8F87D53626C341AC000EADA4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = VirtualMachineBundleGenerator/VirtualMachineBundleGenerator.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 637867499T;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readwrite;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm.installation;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		8F87D53726C341AC000EADA4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4E72614B21833A4E0FE3E98 /* SampleCode.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = VirtualMachineBundleGenerator/VirtualMachineBundleGenerator.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 637867499T;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readwrite;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.bdhg.vm.installation;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -550,15 +453,6 @@
 			buildConfigurations = (
 				8F87D52A26C34111000EADA4 /* Debug */,
 				8F87D52B26C34111000EADA4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8F87D53526C341AC000EADA4 /* Build configuration list for PBXNativeTarget "VirtualMachineBundleGenerator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8F87D53626C341AC000EADA4 /* Debug */,
-				8F87D53726C341AC000EADA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

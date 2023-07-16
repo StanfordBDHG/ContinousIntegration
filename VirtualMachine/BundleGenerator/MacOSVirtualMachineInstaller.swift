@@ -11,10 +11,20 @@ import Virtualization
 
 
 #if arch(arm64)
-class MacOSVirtualMachineInstaller: NSObject {
+class MacOSVirtualMachineInstaller: NSObject, ObservableObject {
     private var installationObserver: NSKeyValueObservation?
+    private var downloadObserver: NSKeyValueObservation?
     private var virtualMachine: VZVirtualMachine!
     private var virtualMachineResponder: MacOSVirtualMachineDelegate?
+    
+    @Published var state: String?
+    @Published var machineInstallerError: String? {
+        didSet {
+            if machineInstallerError != nil {
+                state = "Installation Failed"
+            }
+        }
+    }
     
     
     // Create a bundle on the user's Home directory to store any artifacts
@@ -24,14 +34,53 @@ class MacOSVirtualMachineInstaller: NSObject {
     }
     
     
+    //Observe the download progress.
+    public func download(completionHandler: @escaping () -> Void) {
+        state = "Attempting to download latest available restore image."
+        VZMacOSRestoreImage.fetchLatestSupported { [self](result: Result<VZMacOSRestoreImage, Error>) in
+            switch result {
+            case let .failure(virtualMachineError):
+                machineInstallerError = virtualMachineError.localizedDescription
+                return
+            case let .success(restoreImage):
+                downloadRestoreImage(restoreImage: restoreImage, completionHandler: completionHandler)
+            }
+        }
+    }
+    
+    // Download the restore image from the network.
+    private func downloadRestoreImage(restoreImage: VZMacOSRestoreImage, completionHandler: @escaping () -> Void) {
+        let downloadTask = URLSession.shared.downloadTask(with: restoreImage.url) { localURL, response, virtualMachineError in
+            if let virtualMachineError = virtualMachineError {
+                self.machineInstallerError = "Download failed. \(virtualMachineError.localizedDescription)."
+                return
+            }
+            
+            guard (try? FileManager.default.moveItem(at: localURL!, to: VirtualMachineSettings.restoreImageURL)) != nil else {
+                self.machineInstallerError = "Failed to move downloaded restore image to \(VirtualMachineSettings.restoreImageURL)."
+                return
+            }
+            
+            completionHandler()
+        }
+        
+        downloadObserver = downloadTask.progress.observe(\.fractionCompleted, options: [.initial, .new]) { (progress, change) in
+            Task { @MainActor in
+                self.state = "Restore image download progress: \((change.newValue ?? 0.0) * 100)."
+            }
+        }
+        
+        downloadTask.resume()
+    }
+    
     // Install macOS onto the virtual machine from IPSW.
     public func installMacOS(ipswURL: URL) {
-        NSLog("Attempting to install from IPSW at \(ipswURL).")
+        state = "Attempting to install from IPSW at \(ipswURL)."
         VZMacOSRestoreImage.load(from: ipswURL, completionHandler: { [self](result: Result<VZMacOSRestoreImage, Error>) in
             switch result {
             case let .failure(virtualMachineError):
-                fatalError(virtualMachineError.localizedDescription)
-                
+                machineInstallerError = virtualMachineError.localizedDescription
+                return
             case let .success(restoreImage):
                 installMacOS(restoreImage: restoreImage)
             }
@@ -42,11 +91,13 @@ class MacOSVirtualMachineInstaller: NSObject {
     // Internal helper functions.
     private func installMacOS(restoreImage: VZMacOSRestoreImage) {
         guard let macOSConfiguration = restoreImage.mostFeaturefulSupportedConfiguration else {
-            fatalError("No supported configuration available.")
+            machineInstallerError = "No supported configuration available."
+            return
         }
         
-        if !macOSConfiguration.hardwareModel.isSupported {
-            fatalError("macOSConfiguration configuration isn't supported on the current host.")
+        guard macOSConfiguration.hardwareModel.isSupported else {
+            machineInstallerError = "macOSConfiguration configuration isn't supported on the current host."
+            return
         }
         
         DispatchQueue.main.async { [self] in
@@ -59,10 +110,13 @@ class MacOSVirtualMachineInstaller: NSObject {
     private func createMacPlatformConfiguration(macOSConfiguration: VZMacOSConfigurationRequirements) -> VZMacPlatformConfiguration {
         let macPlatformConfiguration = VZMacPlatformConfiguration()
         
-        guard let auxiliaryStorage = try? VZMacAuxiliaryStorage(creatingStorageAt: VirtualMachineSettings.auxiliaryStorageURL,
-                                                                hardwareModel: macOSConfiguration.hardwareModel,
-                                                                options: []) else {
-            fatalError("Failed to create auxiliary storage.")
+        guard let auxiliaryStorage = try? VZMacAuxiliaryStorage(
+            creatingStorageAt: VirtualMachineSettings.auxiliaryStorageURL,
+            hardwareModel: macOSConfiguration.hardwareModel,
+            options: []
+        ) else {
+            machineInstallerError = "Failed to create auxiliary storage."
+            return macPlatformConfiguration
         }
         macPlatformConfiguration.auxiliaryStorage = auxiliaryStorage
         macPlatformConfiguration.hardwareModel = macOSConfiguration.hardwareModel
@@ -82,13 +136,15 @@ class MacOSVirtualMachineInstaller: NSObject {
         
         virtualMachineConfiguration.platform = createMacPlatformConfiguration(macOSConfiguration: macOSConfiguration)
         virtualMachineConfiguration.cpuCount = MacOSVirtualMachineConfigurationHelper.computeCPUCount()
-        if virtualMachineConfiguration.cpuCount < macOSConfiguration.minimumSupportedCPUCount {
-            fatalError("CPUCount isn't supported by the macOS configuration.")
+        guard virtualMachineConfiguration.cpuCount > macOSConfiguration.minimumSupportedCPUCount else {
+            machineInstallerError = "CPUCount isn't supported by the macOS configuration."
+            return
         }
         
         virtualMachineConfiguration.memorySize = MacOSVirtualMachineConfigurationHelper.computeMemorySize()
-        if virtualMachineConfiguration.memorySize < macOSConfiguration.minimumSupportedMemorySize {
-            fatalError("memorySize isn't supported by the macOS configuration.")
+        guard virtualMachineConfiguration.memorySize > macOSConfiguration.minimumSupportedMemorySize else {
+            machineInstallerError = "memorySize isn't supported by the macOS configuration."
+            return
         }
         
         // Create a 200 GB disk image.
@@ -116,52 +172,61 @@ class MacOSVirtualMachineInstaller: NSObject {
     private func startInstallation(restoreImageURL: URL) {
         let installer = VZMacOSInstaller(virtualMachine: virtualMachine, restoringFromImageAt: restoreImageURL)
         
-        NSLog("Starting installation.")
-        installer.install(completionHandler: { (result: Result<Void, Error>) in
+        state = "Starting installation."
+        installer.install { (result: Result<Void, Error>) in
             if case let .failure(virtualMachineError) = result {
-                fatalError(virtualMachineError.localizedDescription)
+                self.machineInstallerError = virtualMachineError.localizedDescription
+                return
             } else {
-                NSLog("Installation succeeded.")
+                self.state = "Installation succeeded."
             }
-        })
+        }
         
         // Observe installation progress.
         installationObserver = installer.progress.observe(\.fractionCompleted, options: [.initial, .new]) { (progress, change) in
-            NSLog("Installation progress: \(change.newValue! * 100).")
+            Task { @MainActor in
+                self.state = "Installation progress: \((change.newValue ?? 0.0) * 100)."
+            }
         }
     }
     
     private func createVMBundle() {
         let bundleFd = mkdir(VirtualMachineSettings.vmBundlePath, S_IRWXU | S_IRWXG | S_IRWXO)
-        if bundleFd == -1 {
+        guard bundleFd != -1 else {
             if errno == EEXIST {
-                fatalError("Failed to create VM.bundle: the base directory already exists.")
+                machineInstallerError = "Failed to create VM.bundle: the base directory already exists."
+            } else {
+                machineInstallerError = "Failed to create VM.bundle."
             }
-            fatalError("Failed to create VM.bundle.")
+            return
         }
         
         let result = close(bundleFd)
-        if result != 0 {
-            fatalError("Failed to close VM.bundle.")
+        guard result == 0 else {
+            machineInstallerError = "Failed to close VM.bundle."
+            return
         }
     }
     
     // Create an empty disk image for the virtual machine.
     private func createDiskImage() {
         let diskFd = open(VirtualMachineSettings.diskImageURL.path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR)
-        if diskFd == -1 {
-            fatalError("Cannot create disk image.")
+        guard diskFd != -1 else {
+            machineInstallerError = "Cannot create disk image."
+            return
         }
         
         // 200 GB disk space.
         var result = ftruncate(diskFd, 200 * 1024 * 1024 * 1024)
-        if result != 0 {
-            fatalError("ftruncate() failed.")
+        guard result == 0 else {
+            machineInstallerError = "ftruncate() failed."
+            return
         }
         
         result = close(diskFd)
-        if result != 0 {
-            fatalError("Failed to close the disk image.")
+        guard result == 0 else {
+            machineInstallerError = "Failed to close the disk image."
+            return
         }
     }
 }
