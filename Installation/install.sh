@@ -7,11 +7,16 @@
 
 # 1. Setup
 # Load credentials from the .env file
+set -a
 . .env
+set +a
 
 # Enable xcode-select without requiering a sudo password.
 # https://www.smileykeith.com/2021/08/12/xcode-select-sudoers/
 echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
+
+# After this point, no sudo access should be requested, the script should be able to finish on its own.
+
 
 # 2. Install homebrew
 export NONINTERACTIVE=1
@@ -19,10 +24,13 @@ export NONINTERACTIVE=1
 echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# After this point, no sudo access should be requested, the script should be able to finish on its own.
 
 # 3. Install tools
 brew install java
+# sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
 brew install node
 brew install firebase-cli
 brew install fastlane
