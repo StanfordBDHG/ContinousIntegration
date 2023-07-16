@@ -34,9 +34,9 @@ brew upgrade
 echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
 
 # Download Xcode Releases
-xcodes install --latest --experimental-unxip
+xcodes install --update --latest --experimental-unxip --empty-trash
 xcodebuild -downloadAllPlatforms
-xcodes install --latest-prerelease --experimental-unxip
+xcodes install --update --latest-prerelease --experimental-unxip --empty-trash
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
@@ -49,3 +49,8 @@ curl -s https://raw.githubusercontent.com/actions/runner/main/scripts/create-lat
 
 # Move the cleanup scripts and the `.env` file in the GitHub Actions Folder
 cp -rf ./GitHubActions ~/actions-runner
+
+
+# 6. Cleanup
+echo "The installation is complete. Removing the .env credentials file to avoid leaking information."
+rm -f .env
