@@ -1,6 +1,14 @@
-#!/bin/sh
+#!/bin/s
+#
+# This source file is part of the Stanford BDGH VirtualMachine project
+#
+# SPDX-FileCopyrightText: 2023 Stanford University
+#
+# SPDX-License-Identifier: MIT
+#
 
 # Script to document and automate the installation of software for the GitHub Runner environment.
+#
 
 # Initial Setup
 # Ensure that you have set all the correct credentials in the .env file.
@@ -48,11 +56,11 @@ brew upgrade
 
 # Download Xcode Releases
 xcodes install --update --experimental-unxip --no-superuser --empty-trash 14.3.1
-sudo xcode-select -s /Applications/Xcode-14.3.1
+sudo xcode-select -s /Applications/Xcode-14.3.1.app
 xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes install --update --experimental-unxip --no-superuser --empty-trash 15.0 Beta 4
-sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4
+sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4.app
 xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes signout
@@ -61,14 +69,23 @@ xcodes signout
 # Swiftlint can only be installed after Xcode is installed
 brew install swiftlint
 
+
 # 6. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
 # Setup the GitHub Action Runner tools to connect to GitHub
-export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
-curl -s https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh | bash -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
+mkdir ~/actions-runner
 
 # Move the cleanup scripts and the `.env` file in the GitHub Actions Folder to enable an automatic reset of the simulators & cleaning of the working directory.
 cp -rf ./GitHubActions/ ~/actions-runner/
+cp -f ./create-latest-svc.sh ~/actions-runner/
+chmod 755 ~/actions-runner/create-latest-svc.sh
+
+# Install the GitHub Runner
+cd ~/actions-runner
+export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
+./create-latest-svc.sh -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
+rm -f ~/actions-runner/create-latest-svc.sh
+
 
 # 6. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"

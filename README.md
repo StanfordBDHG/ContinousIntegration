@@ -14,6 +14,18 @@ Small project based on the [Running macOS in a virtual machine on Apple silicon]
 
 The repository also consists of scripts and additional setups used for maintaining the build agents.
 
+## Stanford BDHG CI Setup
+
+The CI setup for GitHub Actions runners uses the Virtual Machine app to host a virtual machine that we use as a GitHub Action runner.
+The repository contains the nescessary steps, tools, and scripts to setup the environment.
+1. Setup a macOS machine on conformance to the Stanford device setup requirements: https://uit.stanford.edu/service/StanfordJamf/Install.
+2. Install the Virtual Machine App. Setup the application to "Open on Login" using the macOS dock context menu of the app.
+3. Either generate new virtual machine bundle using the app or use a prexisting bundle. If you use a prexisting bundle that has done all the following steps you can skip the setup steps.
+4. Start the VM using the app, go through the setup process with the minimal possible setup, e.g. **no** location services, **no** Apple ID, and more ...
+5. Setup that the user of the VM automatically logged in when the VM starts: https://support.apple.com/en-au/HT201476.
+6. Disable automatic screen saves, turning off the display, and requiering a passcode when the screen is locked (https://support.apple.com/guide/mac-help/set-sleep-and-wake-settings-mchle41a6ccd/mac) and enable the perserve automatic sleeping when the display if off setting in the System Settings > Displays > Advanced settings.
+6. Download this repository from GitHub to the VM and run the installation steps by adapting the `.env` file in the `Installation` folder and runnig `$ sh install.sh` in the `Installation` folder. Optionally change the installed Xcode versions in the script.
+7. Ensure that the GitHub runner apprears on your GitHub organization or repo.
 
 ## Build and Run the Application
 
