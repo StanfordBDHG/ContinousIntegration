@@ -26,33 +26,7 @@ set +a
 echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
 
 
-# 2. Install homebrew
-export NONINTERACTIVE=1
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
-# 3. Install tools
-brew install java
-sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-
-brew install node
-brew install firebase-cli
-brew install fastlane
-# Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
-brew install aria2
-brew install xcodesorg/made/xcodes
-# Required by the GitHub Runner Setup:
-brew install jq
-
-# Ensure that everything on the system is up-to-date
-brew upgrade
-
-
-# 4. Install Xcode
+# 2. Install Xcode
 
 # Download Xcode Releases
 xcodes install --update --experimental-unxip --no-superuser --empty-trash 14.3.1
@@ -65,18 +39,52 @@ xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
-# 5. Install Swiftlint
-# Swiftlint can only be installed after Xcode is installed
+
+# 3. Install homebrew
+export NONINTERACTIVE=1
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# 4. Install tools
+brew install java
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
+brew install node
+brew install firebase-cli
+brew install fastlane
 brew install swiftlint
+# Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
+brew install aria2
+brew install xcodesorg/made/xcodes
+# Required by the GitHub Runner Setup:
+brew install jq
+
+# Ensure that everything on the system is up-to-date
+brew upgrade
+
+# 5. Test and start the firebase emulator
+firebase emulators:exec "echo 'Firebase emulator installed and started successfully!'"
 
 
 # 6. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
 # Setup the GitHub Action Runner tools to connect to GitHub
+rm -rf ~/actions-runner
 mkdir ~/actions-runner
 
 # Move the cleanup scripts and the `.env` file in the GitHub Actions Folder to enable an automatic reset of the simulators & cleaning of the working directory.
-cp -rf ./GitHubActions/ ~/actions-runner/
+echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=/Users/$USER/cleanup_started.sh" >> ~/actions-runner/.env
+cp -f ./GitHubActions/cleanup_started.sh ~/cleanup_started.sh
+chmod 755 ~/cleanup_started.sh
+
+echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/Users/$USER/cleanup_completed.sh" >> ~/actions-runner/.env
+cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
+chmod 755 ~/cleanup_completed.sh
+
 cp -f ./create-latest-svc.sh ~/actions-runner/
 chmod 755 ~/actions-runner/create-latest-svc.sh
 
@@ -87,5 +95,5 @@ export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
 rm -f ~/actions-runner/create-latest-svc.sh
 
 
-# 6. Cleanup
+# 7. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"
