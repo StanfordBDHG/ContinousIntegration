@@ -67,7 +67,7 @@ brew install jq
 brew upgrade
 
 # 5. Test and start the firebase emulator
-firebase emulators:exec "echo 'Firebase emulator installed and started successfully!'"
+firebase emulators:exec --project test "echo 'Firebase emulator installed and started successfully!'"
 
 
 # 6. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
