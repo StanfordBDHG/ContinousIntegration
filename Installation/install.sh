@@ -72,11 +72,9 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 # Download Xcode Releases
 xcodes install --update --experimental-unxip --empty-trash 14.3.1
 sudo xcode-select -s /Applications/Xcode-14.3.1.app
-xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes install --update --experimental-unxip --empty-trash 15.0 Beta 4
 sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4.app
-xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
