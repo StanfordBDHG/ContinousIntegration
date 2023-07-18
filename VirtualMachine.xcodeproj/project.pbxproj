@@ -15,6 +15,7 @@
 		2F3048992A61D9F7000FBE33 /* VirtualMachineSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */; };
 		2F30489B2A61DA78000FBE33 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489A2A61DA78000FBE33 /* SettingsView.swift */; };
 		2F30489E2A622D8C000FBE33 /* Bundle+DisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */; };
+		2F4C19802A664981006C7C00 /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C197F2A664981006C7C00 /* FilePicker.swift */; };
 		2FF9B5672A647C2800BB24B5 /* BundleGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF9B5662A647C2800BB24B5 /* BundleGeneratorView.swift */; };
 		2FF9B5682A647C6800BB24B5 /* MacOSVirtualMachineInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F87D53926C3423F000EADA4 /* MacOSVirtualMachineInstaller.swift */; };
 		2FF9B5692A647C6B00BB24B5 /* MacOSRestoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB90BED26D5AC8100988F51 /* MacOSRestoreImage.swift */; };
@@ -35,6 +36,7 @@
 		2F3048982A61D9F7000FBE33 /* VirtualMachineSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualMachineSettingsView.swift; sourceTree = "<group>"; };
 		2F30489A2A61DA78000FBE33 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2F30489D2A622D8C000FBE33 /* Bundle+DisplayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+DisplayName.swift"; sourceTree = "<group>"; };
+		2F4C197F2A664981006C7C00 /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		2FF9B5662A647C2800BB24B5 /* BundleGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleGeneratorView.swift; sourceTree = "<group>"; };
 		8F87D51D26C34111000EADA4 /* VirtualMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F87D52026C34111000EADA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				8F87D53D26C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift */,
 				8F87D53E26C34259000EADA4 /* MacOSVirtualMachineDelegate.swift */,
 				2F3048962A61D81D000FBE33 /* VirtualMachineSettings.swift */,
+				2F4C197F2A664981006C7C00 /* FilePicker.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				8F87D52126C34111000EADA4 /* AppDelegate.swift in Sources */,
 				2F30489E2A622D8C000FBE33 /* Bundle+DisplayName.swift in Sources */,
 				2F3048972A61D81D000FBE33 /* VirtualMachineSettings.swift in Sources */,
+				2F4C19802A664981006C7C00 /* FilePicker.swift in Sources */,
 				8F87D54126C34259000EADA4 /* MacOSVirtualMachineDelegate.swift in Sources */,
 				8F87D54026C34259000EADA4 /* MacOSVirtualMachineConfigurationHelper.swift in Sources */,
 			);

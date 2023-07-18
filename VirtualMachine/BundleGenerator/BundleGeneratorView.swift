@@ -30,14 +30,19 @@ struct BundleGeneratorView: View {
     var body: some View {
         VStack {
             Text(macOSVirtualMachineInstaller.state ?? "macOS Virtual Machine Generator idle.")
-            TextField(text: $ipswPath) {
-                Text("Optional IPSW Path")
+            HStack {
+                TextField(text: $ipswPath) {
+                    Text("Optional IPSW Path")
+                }
+                FilePicker(filePath: $ipswPath)
             }
             Button("Create macOS Virtual Machine") {
                 createMacOSVirtualMachine()
             }
                 .disabled(macOSVirtualMachineInstaller.state != nil)
         }
+            .frame(maxWidth: 500)
+            .padding(.horizontal)
             .alert(
                 "Virtual Machine Error",
                 isPresented: presentError,

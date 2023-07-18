@@ -29,7 +29,41 @@ echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLa
 # We install xcpretty right at the beginning to avoid any repeated requests for a password.
 sudo gem install xcpretty
 
-# 3. Install Xcode
+# 3. Install homebrew
+export NONINTERACTIVE=1
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# 4. Install tools
+brew install java
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+
+brew install node
+brew install firebase-cli
+brew install fastlane
+# Set the local correctly to work with fastlane
+echo 'export LC_ALL=en_US.UTF-8' >> ~/.zshrc
+echo 'export LANG=en_US.UTF-8' >> ~/.zshrc
+
+brew install swiftlint
+# Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
+brew install aria2
+brew install xcodesorg/made/xcodes
+# Required by the GitHub Runner Setup:
+brew install jq
+
+# Ensure that everything on the system is up-to-date
+brew upgrade
+
+
+# 5. Test and start the firebase emulator
+firebase emulators:exec --project test "echo 'Firebase emulator installed and started successfully!'"
+
+
+# 6. Install Xcode
 # We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
 xcodes install --update --experimental-unxip --no-superuser --empty-trash 14.3.1
@@ -41,36 +75,6 @@ sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4.app
 xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
 xcodes signout
-
-
-# 4. Install homebrew
-export NONINTERACTIVE=1
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
-# 5. Install tools
-brew install java
-sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-
-brew install node
-brew install firebase-cli
-brew install fastlane
-brew install swiftlint
-# Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
-brew install aria2
-brew install xcodesorg/made/xcodes
-# Required by the GitHub Runner Setup:
-brew install jq
-
-# Ensure that everything on the system is up-to-date
-brew upgrade
-
-# 6. Test and start the firebase emulator
-firebase emulators:exec --project test "echo 'Firebase emulator installed and started successfully!'"
 
 
 # 7. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md

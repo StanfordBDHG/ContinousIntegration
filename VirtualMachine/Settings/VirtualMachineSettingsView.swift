@@ -36,8 +36,11 @@ struct VirtualMachineSettingsView: View {
 
     var body: some View {
         Form {
-            TextField(text: $vmBundlePath) {
-                Text("Bundle Path")
+            HStack {
+                TextField(text: $vmBundlePath) {
+                    Text("Bundle Path")
+                }
+                FilePicker(filePath: $vmBundlePath)
             }
             Slider(value: memorySizeProxy, in: minimumAllowedMemorySize...maximumAllowedMemorySize) {
                 Text("Memory Size (\(memorySize, specifier: "%.1f") GB)")
