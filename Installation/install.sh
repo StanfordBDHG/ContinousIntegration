@@ -25,9 +25,12 @@ set +a
 # https://www.smileykeith.com/2021/08/12/xcode-select-sudoers/
 echo "%admin ALL=NOPASSWD: /usr/bin/xcode-select,/usr/bin/xcodebuild -runFirstLaunch" | sudo tee /etc/sudoers.d/xcode
 
+# 2. Install xcpretty
+# We install xcpretty right at the beginning to avoid any repeated requests for a password.
+sudo gem install xcpretty
 
-# 2. Install Xcode
-
+# 3. Install Xcode
+# We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
 xcodes install --update --experimental-unxip --no-superuser --empty-trash 14.3.1
 sudo xcode-select -s /Applications/Xcode-14.3.1.app
@@ -40,14 +43,14 @@ xcodebuild -downloadAllPlatforms
 xcodes signout
 
 
-# 3. Install homebrew
+# 4. Install homebrew
 export NONINTERACTIVE=1
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
-# 4. Install tools
+# 5. Install tools
 brew install java
 sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
@@ -66,11 +69,11 @@ brew install jq
 # Ensure that everything on the system is up-to-date
 brew upgrade
 
-# 5. Test and start the firebase emulator
+# 6. Test and start the firebase emulator
 firebase emulators:exec --project test "echo 'Firebase emulator installed and started successfully!'"
 
 
-# 6. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
+# 7. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
 # Setup the GitHub Action Runner tools to connect to GitHub
 rm -rf ~/actions-runner
@@ -95,5 +98,5 @@ export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
 rm -f ~/actions-runner/create-latest-svc.sh
 
 
-# 7. Cleanup
+# 8. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"
