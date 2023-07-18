@@ -48,6 +48,10 @@ brew install fastlane
 echo 'export LC_ALL=en_US.UTF-8' >> ~/.zshrc
 echo 'export LANG=en_US.UTF-8' >> ~/.zshrc
 
+brew install git-lfs
+git lfs install
+git lfs install --system
+
 brew install swiftlint
 # Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
 brew install aria2
@@ -66,11 +70,11 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 # 6. Install Xcode
 # We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
-xcodes install --update --experimental-unxip --no-superuser --empty-trash 14.3.1
+xcodes install --update --experimental-unxip --empty-trash 14.3.1
 sudo xcode-select -s /Applications/Xcode-14.3.1.app
 xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
-xcodes install --update --experimental-unxip --no-superuser --empty-trash 15.0 Beta 4
+xcodes install --update --experimental-unxip --empty-trash 15.0 Beta 4
 sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4.app
 xcodebuild -runFirstLaunch
 xcodebuild -downloadAllPlatforms
