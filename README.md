@@ -10,7 +10,7 @@ SPDX-License-Identifier: MIT
 
 # Continous Integration
 
-The repository also consists of scripts and additional setups for maintaining the build agents for the Stanford BDHG and related agents.
+The repository consists scripts and additional setups for maintaining the build agents for the Stanford BDHG and related projects.
 
 
 ## Setup Instructions
@@ -35,7 +35,6 @@ Contributions to this project are welcome. Please make sure to read the [contrib
 
 ## License
 
-This project is based on the [Running macOS in a virtual machine on Apple silicon](https://developer.apple.com/documentation/virtualization/running_macos_in_a_virtual_machine_on_apple_silicon) example application.
 You can find a list of contributors in the `CONTRIBUTORS.md` file.
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordSpezi/Spezi/tree/main/LICENSES) for more information.
 
