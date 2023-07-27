@@ -52,7 +52,6 @@ brew install git-lfs
 git lfs install
 git lfs install --system
 
-brew install swiftlint
 # Install xcode & speed up the Xcode download using aria2: https://github.com/XcodesOrg/xcodes
 brew install aria2
 brew install xcodesorg/made/xcodes
@@ -73,13 +72,17 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 xcodes install --update --experimental-unxip --empty-trash 14.3.1
 sudo xcode-select -s /Applications/Xcode-14.3.1.app
 xcodebuild -downloadAllPlatforms
-xcodes install --update --experimental-unxip --empty-trash 15.0 Beta 4
-sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.4.app
+xcodes install --update --experimental-unxip --empty-trash 15.0 Beta 5
+sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.5.app
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
 
-# 7. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
+# 7. Install SwiftLint
+brew install swiftlint
+
+
+# 8. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
 # Setup the GitHub Action Runner tools to connect to GitHub
 rm -rf ~/actions-runner
@@ -104,5 +107,5 @@ export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
 rm -f ~/actions-runner/create-latest-svc.sh
 
 
-# 8. Cleanup
+# 9. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"

@@ -12,4 +12,3 @@ Virtual Machine Contributors
 ============================
 
 * [Paul Schmiedmayer](https://github.com/PSchmiedmayer)
-* [Apple](https://developer.apple.com/documentation/virtualization/running_macos_in_a_virtual_machine_on_apple_silicon)
