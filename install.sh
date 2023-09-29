@@ -69,14 +69,14 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 # 6. Install Xcode
 # We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
-xcodes install --update --experimental-unxip --empty-trash 14.3.1
-sudo xcode-select -s /Applications/Xcode-14.3.1.app
-xcodebuild -downloadAllPlatforms
-xcodes install --update --experimental-unxip --empty-trash 15.0 Beta 5
-sudo xcode-select -s /Applications/Xcode-15.0.0-Beta.5.app
+xcodes install --update --experimental-unxip --empty-trash 15.0
+sudo xcode-select -s /Applications/Xcode-15.0.app
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
+curl -o AppleWWDRCAG3.cer https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
+rm -f AppleWWDRCAG3.cer
 
 # 7. Install SwiftLint
 brew install swiftlint
