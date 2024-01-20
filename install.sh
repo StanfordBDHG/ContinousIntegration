@@ -90,8 +90,8 @@ brew install jq
 curl -fsSL -o ~/create-latest-svc.sh https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh
 chmod 755 ~/create-latest-svc.sh
 
-cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
-chmod 755 ~/cleanup_completed.sh
+cp -f ./GitHubActions/cleanup_started.sh ~/cleanup_started.sh
+chmod 755 ~/cleanup_started.sh
 
 cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
 chmod 755 ~/cleanup_completed.sh
