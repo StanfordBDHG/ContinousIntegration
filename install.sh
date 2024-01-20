@@ -69,8 +69,8 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 # 6. Install Xcode
 # We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
-xcodes install --update --experimental-unxip --empty-trash 15.0
-sudo xcode-select -s /Applications/Xcode-15.0.app
+xcodes install --update --experimental-unxip --empty-trash 15.2
+sudo xcode-select -s /Applications/Xcode-15.2.app
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
@@ -84,27 +84,28 @@ brew install swiftlint
 
 # 8. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
-# Setup the GitHub Action Runner tools to connect to GitHub
-rm -rf ~/actions-runner
-mkdir ~/actions-runner
+brew install jq
 
-# Move the cleanup scripts and the `.env` file in the GitHub Actions Folder to enable an automatic reset of the simulators & cleaning of the working directory.
-echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=/Users/$USER/cleanup_started.sh" >> ~/actions-runner/.env
+# Setup the GitHub Action Runner setup script & copy cleanup scripts
+curl -fsSL -o ~/create-latest-svc.sh https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh
+chmod 755 ~/create-latest-svc.sh
+
 cp -f ./GitHubActions/cleanup_started.sh ~/cleanup_started.sh
 chmod 755 ~/cleanup_started.sh
 
-echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/Users/$USER/cleanup_completed.sh" >> ~/actions-runner/.env
 cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
 chmod 755 ~/cleanup_completed.sh
 
-cp -f ./create-latest-svc.sh ~/actions-runner/
-chmod 755 ~/actions-runner/create-latest-svc.sh
+# Install the runner
+cd $HOME
 
-# Install the GitHub Runner
-cd ~/actions-runner
 export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
-./create-latest-svc.sh -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
-rm -f ~/actions-runner/create-latest-svc.sh
+sh ~/create-latest-svc.sh -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
+rm -f ~/create-latest-svc.sh
+
+# Move the cleanup scripts and the `.env` file in the GitHub Actions Folder to enable an automatic reset of the simulators & cleaning of the working directory.
+echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=/Users/$USER/cleanup_started.sh" >> ~/runner/.env
+echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/Users/$USER/cleanup_completed.sh" >> ~/runner/.env
 
 
 # 9. Cleanup
