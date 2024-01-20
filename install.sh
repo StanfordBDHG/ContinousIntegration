@@ -84,22 +84,29 @@ brew install swiftlint
 
 # 8. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
-# Setup the GitHub Action Runner tools to connect to GitHub
-curl -fsSL https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh
+brew install jq
+
+# Setup the GitHub Action Runner setup script & copy cleanup scripts
+curl -fsSL -o ~/create-latest-svc.sh https://raw.githubusercontent.com/actions/runner/main/scripts/create-latest-svc.sh
 chmod 755 ~/create-latest-svc.sh
 
+cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
+chmod 755 ~/cleanup_completed.sh
+
+cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
+chmod 755 ~/cleanup_completed.sh
+
+# Install the runner
+cd $HOME
+
 export RUNNER_CFG_PAT=$GITHUB_ACTION_RUNNER_PAT
-./create-latest-svc.sh -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
+sh ~/create-latest-svc.sh -s $GITHUB_ACTION_SCOPE -n $GITHUB_ACTION_NAME
 rm -f ~/create-latest-svc.sh
 
 # Move the cleanup scripts and the `.env` file in the GitHub Actions Folder to enable an automatic reset of the simulators & cleaning of the working directory.
 echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=/Users/$USER/cleanup_started.sh" >> ~/runner/.env
-cp -f ./GitHubActions/cleanup_started.sh ~/cleanup_started.sh
-chmod 755 ~/cleanup_started.sh
-
 echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/Users/$USER/cleanup_completed.sh" >> ~/runner/.env
-cp -f ./GitHubActions/cleanup_completed.sh ~/cleanup_completed.sh
-chmod 755 ~/cleanup_completed.sh
+
 
 # 9. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"
