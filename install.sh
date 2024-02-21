@@ -1,4 +1,4 @@
-#!/bin/s
+#!/bin/sh
 #
 # This source file is part of the Stanford BDGH VirtualMachine project
 #
