@@ -69,8 +69,8 @@ firebase emulators:exec --project test "echo 'Firebase emulator installed and st
 # 6. Install Xcode
 # We install Xcode right at the beginning to avoid any interactive requests in the middle of the script like asking for a 2FA authentication code.
 # Download Xcode Releases
-xcodes install --update --experimental-unxip --empty-trash 15.2
-sudo xcode-select -s /Applications/Xcode-15.2.app
+xcodes install --update --experimental-unxip --empty-trash 15.3
+sudo xcode-select -s /Applications/Xcode-15.3.app
 xcodebuild -downloadAllPlatforms
 xcodes signout
 
