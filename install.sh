@@ -82,7 +82,8 @@ rm -f AppleWWDRCAG3.cer
 brew install swiftlint
 
 
-# 8. Enable homebrew autoupdate 
+# 8. Enable homebrew autoupdate
+brew tap homebrew/autoupdate
 brew autoupdate start --upgrade
 
 
