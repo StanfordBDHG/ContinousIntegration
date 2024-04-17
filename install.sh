@@ -82,7 +82,12 @@ rm -f AppleWWDRCAG3.cer
 brew install swiftlint
 
 
-# 8. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
+# 8. Enable homebrew autoupdate
+brew tap homebrew/autoupdate
+brew autoupdate start --upgrade
+
+
+# 9. Install GitHub Action Runners - https://github.com/actions/runner/blob/main/docs/automate.md
 
 brew install jq
 
@@ -108,5 +113,5 @@ echo "ACTIONS_RUNNER_HOOK_JOB_STARTED=/Users/$USER/cleanup_started.sh" >> ~/runn
 echo "ACTIONS_RUNNER_HOOK_JOB_COMPLETED=/Users/$USER/cleanup_completed.sh" >> ~/runner/.env
 
 
-# 9. Cleanup
+# 10. Cleanup
 echo "The installation is complete. Ensure that you remove the .env credentials file to avoid leaking information!"
