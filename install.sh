@@ -78,9 +78,10 @@ curl -o AppleWWDRCAG3.cer https://www.apple.com/certificateauthority/AppleWWDRCA
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain AppleWWDRCAG3.cer
 rm -f AppleWWDRCAG3.cer
 
-# 7. Install SwiftLint & xcbeautify
+# 7. Install additional build tools
 brew install swiftlint
 brew install xcbeautify
+brew install peripheryapp/periphery/periphery
 
 
 # 8. Enable homebrew autoupdate
